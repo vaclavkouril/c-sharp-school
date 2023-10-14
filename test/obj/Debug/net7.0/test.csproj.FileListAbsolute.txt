@@ -1,0 +1,15 @@
+/home/starvex/Documents/c-sharp-third-sem/test/bin/Debug/net7.0/test
+/home/starvex/Documents/c-sharp-third-sem/test/bin/Debug/net7.0/test.deps.json
+/home/starvex/Documents/c-sharp-third-sem/test/bin/Debug/net7.0/test.runtimeconfig.json
+/home/starvex/Documents/c-sharp-third-sem/test/bin/Debug/net7.0/test.dll
+/home/starvex/Documents/c-sharp-third-sem/test/bin/Debug/net7.0/test.pdb
+/home/starvex/Documents/c-sharp-third-sem/test/obj/Debug/net7.0/test.csproj.AssemblyReference.cache
+/home/starvex/Documents/c-sharp-third-sem/test/obj/Debug/net7.0/test.GeneratedMSBuildEditorConfig.editorconfig
+/home/starvex/Documents/c-sharp-third-sem/test/obj/Debug/net7.0/test.AssemblyInfoInputs.cache
+/home/starvex/Documents/c-sharp-third-sem/test/obj/Debug/net7.0/test.AssemblyInfo.cs
+/home/starvex/Documents/c-sharp-third-sem/test/obj/Debug/net7.0/test.csproj.CoreCompileInputs.cache
+/home/starvex/Documents/c-sharp-third-sem/test/obj/Debug/net7.0/test.dll
+/home/starvex/Documents/c-sharp-third-sem/test/obj/Debug/net7.0/refint/test.dll
+/home/starvex/Documents/c-sharp-third-sem/test/obj/Debug/net7.0/test.pdb
+/home/starvex/Documents/c-sharp-third-sem/test/obj/Debug/net7.0/test.genruntimeconfig.cache
+/home/starvex/Documents/c-sharp-third-sem/test/obj/Debug/net7.0/ref/test.dll
