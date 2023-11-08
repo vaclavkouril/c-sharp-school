@@ -1,0 +1,15 @@
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/bin/Debug/net7.0/WordCounting
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/bin/Debug/net7.0/WordCounting.deps.json
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/bin/Debug/net7.0/WordCounting.runtimeconfig.json
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/bin/Debug/net7.0/WordCounting.dll
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/bin/Debug/net7.0/WordCounting.pdb
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/obj/Debug/net7.0/WordCounting.csproj.AssemblyReference.cache
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/obj/Debug/net7.0/WordCounting.GeneratedMSBuildEditorConfig.editorconfig
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/obj/Debug/net7.0/WordCounting.AssemblyInfoInputs.cache
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/obj/Debug/net7.0/WordCounting.AssemblyInfo.cs
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/obj/Debug/net7.0/WordCounting.csproj.CoreCompileInputs.cache
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/obj/Debug/net7.0/WordCounting.dll
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/obj/Debug/net7.0/refint/WordCounting.dll
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/obj/Debug/net7.0/WordCounting.pdb
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/obj/Debug/net7.0/WordCounting.genruntimeconfig.cache
+/home/starvex/Documents/c-sharp-third-sem/WordCounting/obj/Debug/net7.0/ref/WordCounting.dll

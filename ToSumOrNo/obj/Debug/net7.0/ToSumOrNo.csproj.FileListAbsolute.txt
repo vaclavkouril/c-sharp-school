@@ -1,0 +1,15 @@
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/bin/Debug/net7.0/ToSumOrNo
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/bin/Debug/net7.0/ToSumOrNo.deps.json
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/bin/Debug/net7.0/ToSumOrNo.runtimeconfig.json
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/bin/Debug/net7.0/ToSumOrNo.dll
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/bin/Debug/net7.0/ToSumOrNo.pdb
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/obj/Debug/net7.0/ToSumOrNo.csproj.AssemblyReference.cache
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/obj/Debug/net7.0/ToSumOrNo.GeneratedMSBuildEditorConfig.editorconfig
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/obj/Debug/net7.0/ToSumOrNo.AssemblyInfoInputs.cache
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/obj/Debug/net7.0/ToSumOrNo.AssemblyInfo.cs
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/obj/Debug/net7.0/ToSumOrNo.csproj.CoreCompileInputs.cache
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/obj/Debug/net7.0/ToSumOrNo.dll
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/obj/Debug/net7.0/refint/ToSumOrNo.dll
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/obj/Debug/net7.0/ToSumOrNo.pdb
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/obj/Debug/net7.0/ToSumOrNo.genruntimeconfig.cache
+/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/obj/Debug/net7.0/ref/ToSumOrNo.dll

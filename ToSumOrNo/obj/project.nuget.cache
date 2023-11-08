@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "eMHylNmmmAJho38wNQMBaaWZGDIhto1CNtR2Vcyo67YKF8R/PKg3sBvdVGDm3uej31/3tucHiECkXjDcSQOLfA==",
+  "success": true,
+  "projectFilePath": "/home/starvex/Documents/c-sharp-third-sem/ToSumOrNo/ToSumOrNo.csproj",
+  "expectedPackageFiles": [
+    "/home/starvex/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.12/microsoft.aspnetcore.app.ref.7.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

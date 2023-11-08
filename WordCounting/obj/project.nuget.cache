@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "RDaZ/owHS/5k/YUb4SHB0sdqi/8rIHRza9Au9kw5MS0o2hVr1UgAcTjETRWaWof5i2QsSWP3OevBkLzMRX/33w==",
+  "success": true,
+  "projectFilePath": "/home/starvex/Documents/c-sharp-third-sem/WordCounting/WordCounting.csproj",
+  "expectedPackageFiles": [
+    "/home/starvex/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.11/microsoft.aspnetcore.app.ref.7.0.11.nupkg.sha512"
+  ],
+  "logs": []
+}
