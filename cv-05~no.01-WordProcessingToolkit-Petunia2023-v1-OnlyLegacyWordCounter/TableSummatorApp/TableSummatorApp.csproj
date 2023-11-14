@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileProcessingConsoleAppFramework\FileProcessingConsoleAppFramework.csproj" />
+    <ProjectReference Include="..\TokenProcessingFramework\TokenProcessingFramework.csproj" />
+  </ItemGroup>
+
+</Project>

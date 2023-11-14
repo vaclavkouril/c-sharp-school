@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "I+sxSJGhjyjZ5ly06JRNJAHCf35wiUXaXBCHgRh3mIY+FFuzccZWskFYHMfp6dMbDvORY1fw8eTU+tLSrVGNyw==",
+  "success": true,
+  "projectFilePath": "/home/starvex/Documents/c-sharp-school/bugs/bugs.csproj",
+  "expectedPackageFiles": [
+    "/home/starvex/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.13/microsoft.aspnetcore.app.ref.7.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
