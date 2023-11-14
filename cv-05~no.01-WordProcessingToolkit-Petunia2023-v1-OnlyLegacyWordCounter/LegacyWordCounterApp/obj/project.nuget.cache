@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "MpPTQrr64fa7/TCWS75Sp3wrm0waMRmBfg6Es7LkQUGkLs65BU5vQ9eV0sEArKww6mpr2zch101TtEaHMHkhBg==",
+  "success": true,
+  "projectFilePath": "/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/LegacyWordCounterApp/LegacyWordCounterApp.csproj",
+  "expectedPackageFiles": [
+    "/home/starvex/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.13/microsoft.aspnetcore.app.ref.7.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}

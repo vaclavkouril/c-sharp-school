@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "0xmGCTUF7XIGPJPYQrb6g8GvBLtkYi6RCxWF5XvUfmvdoOuo8c3QZWMlSYv0ZNTIp7H71PVyvZickb7wyfvxFQ==",
+  "success": true,
+  "projectFilePath": "/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/TableSummatorApp/TableSummatorApp.csproj",
+  "expectedPackageFiles": [
+    "/home/starvex/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.13/microsoft.aspnetcore.app.ref.7.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}

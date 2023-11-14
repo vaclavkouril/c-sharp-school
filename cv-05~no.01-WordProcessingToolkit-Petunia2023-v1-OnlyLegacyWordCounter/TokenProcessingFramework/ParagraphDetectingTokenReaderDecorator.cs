@@ -24,7 +24,7 @@ public record class ParagraphDetectingTokenReaderDecorator(ITokenReader Reader) 
 				_nextToken = token;
 				return new Token(TokenType.EndOfParagraph);
 			}
-			return token;
+			return new Token(TokenType.EndOfLine);
 		}
 	}
 }

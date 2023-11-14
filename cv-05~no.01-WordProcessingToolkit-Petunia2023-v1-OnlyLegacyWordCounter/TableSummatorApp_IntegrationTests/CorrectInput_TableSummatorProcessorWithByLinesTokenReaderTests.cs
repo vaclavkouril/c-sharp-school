@@ -14,12 +14,12 @@ namespace TableSummatorApp_IntegrationTests {
 			var selectedColumn = "cena";
 			var expectedOutput = """
 				cena
-				----
+				:----
 				12
 
 				""";
 
-			var tokenReader = new ByLinesTokenReader(new StringReader(input));
+			var tokenReader = new ByLinesTokenReader(new SReader(input));
 			var outputWriter = new StringWriter();
 			var processor = new TableSummatorProcessor(outputWriter, selectedColumn);
 

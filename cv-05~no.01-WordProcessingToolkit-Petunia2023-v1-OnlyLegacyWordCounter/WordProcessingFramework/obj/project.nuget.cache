@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "TXscjjKBacrm2H/FOb3Zk8l637UO5T59qwi2CxyOIISk46C38YXA4la/9Br/uDinL+UmyiJDgwcYlY734i1IKg==",
+  "success": true,
+  "projectFilePath": "/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/WordProcessingFramework.csproj",
+  "expectedPackageFiles": [
+    "/home/starvex/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.13/microsoft.aspnetcore.app.ref.7.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
