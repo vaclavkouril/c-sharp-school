@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "bScRzPreFbPFq5BrVdxcrJl0y230wd/Fjc3ZHF4MHgQN+Mq7XceQO18AK+EujASKi9vjvyZNXpLRwIbiXZUbkw==",
+  "success": true,
+  "projectFilePath": "/home/starvex/Documents/c-sharp-school/cv-05~no.02-LegacyWordCounterApp-WithUnitTests-v1-OnlyProcessAllWordsTests/LegacyWordCounterApp/LegacyWordCounterApp.csproj",
+  "expectedPackageFiles": [
+    "/home/starvex/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.13/microsoft.aspnetcore.app.ref.7.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}

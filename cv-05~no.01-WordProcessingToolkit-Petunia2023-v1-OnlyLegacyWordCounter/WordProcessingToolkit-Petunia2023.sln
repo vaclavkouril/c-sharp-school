@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TableSummatorApp_Integratio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParagraphDetectingTokenReader_xUnit_tests", "ParagraphDetectingTokenReader_xUnit_tests\ParagraphDetectingTokenReader_xUnit_tests.csproj", "{3306442B-D411-4181-9C3B-E329A32C2011}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableSummatorProcessor_UnitTest", "TableSummatorProcessor_UnitTest\TableSummatorProcessor_UnitTest.csproj", "{47790225-C39A-411F-8794-89F410709138}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{3306442B-D411-4181-9C3B-E329A32C2011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3306442B-D411-4181-9C3B-E329A32C2011}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3306442B-D411-4181-9C3B-E329A32C2011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47790225-C39A-411F-8794-89F410709138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47790225-C39A-411F-8794-89F410709138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47790225-C39A-411F-8794-89F410709138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47790225-C39A-411F-8794-89F410709138}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

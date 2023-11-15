@@ -6,6 +6,7 @@ namespace TokenProcessingFramework;
 
 public record class ParagraphDetectingTokenReaderDecorator(ITokenReader Reader) : ITokenReader {
 	private Token? _nextToken = null;
+	private bool _firstWordFound = false;
 
 	public Token ReadToken() {
 		if (_nextToken is not null) {
@@ -20,11 +21,19 @@ public record class ParagraphDetectingTokenReaderDecorator(ITokenReader Reader) 
 				newLinesFound++;
 			}
 
+			if (token.Type == TokenType.EndOfInput)
+				return token;
+
 			if (newLinesFound > 1) {
+				if (!_firstWordFound){
+					_firstWordFound = true;
+					return token;
+				}
 				_nextToken = token;
 				return new Token(TokenType.EndOfParagraph);
 			}
-			return new Token(TokenType.EndOfLine);
+			_firstWordFound = true;
+			return token;
 		}
 	}
 }

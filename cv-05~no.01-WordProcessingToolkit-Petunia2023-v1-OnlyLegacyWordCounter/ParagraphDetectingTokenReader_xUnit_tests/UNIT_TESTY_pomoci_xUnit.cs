@@ -1,9 +1,6 @@
 /*
 "UNIT TESTY pomocí xUnit"
 
-
-namespace ParagraphDetectingTokenReader_xUnit_tests;
-
 public class UnitTests
 {
     [Fact]
@@ -43,7 +40,6 @@ public class UnitTests
             new Token(TokenType.Word),
             new Token(TokenType.Word),
             new Token(TokenType.Word),
-            new Token(TokenType.EndOfLine),
             new Token(TokenType.EndOfInput)
         };
 
@@ -84,7 +80,6 @@ public class UnitTests
             new Token(TokenType.Word),
             new Token(TokenType.Word),
             new Token(TokenType.Word),
-            new Token(TokenType.EndOfLine),
             new Token(TokenType.EndOfInput)
         };
 
@@ -114,7 +109,6 @@ public class UnitTests
             new Token(TokenType.Word),
             new Token(TokenType.Word),
             new Token(TokenType.Word),
-            new Token(TokenType.EndOfLine),
             new Token(TokenType.EndOfInput)
         };
         var mockTokenRead = new TokenReaderMock(input);
@@ -127,7 +121,6 @@ public class UnitTests
             new Token(TokenType.Word),
             new Token(TokenType.Word),
             new Token(TokenType.Word),
-            new Token(TokenType.EndOfLine),
             new Token(TokenType.EndOfInput)
         };
 
@@ -152,7 +145,6 @@ public class UnitTests
             new Token(TokenType.Word),
             new Token(TokenType.Word),
             new Token(TokenType.Word),
-            new Token(TokenType.EndOfLine),
             new Token(TokenType.EndOfInput)
         };
         var mockTokenRead = new TokenReaderMock(input);
@@ -162,7 +154,6 @@ public class UnitTests
             new Token(TokenType.Word),
             new Token(TokenType.Word),
             new Token(TokenType.Word),
-            new Token(TokenType.EndOfLine),
             new Token(TokenType.EndOfInput)
         };
 
@@ -201,7 +192,6 @@ public class UnitTests
             new Token(TokenType.Word),
             new Token(TokenType.Word),
             new Token(TokenType.Word),
-            new Token(TokenType.EndOfLine),
             new Token(TokenType.EndOfInput)
         };
 
@@ -268,7 +258,6 @@ public class UnitTests
             new Token(TokenType.Word),
             new Token(TokenType.Word),
             new Token(TokenType.Word),
-            new Token(TokenType.EndOfLine),
             new Token(TokenType.EndOfInput)
         };
 
@@ -340,7 +329,6 @@ public class UnitTests
             new Token(TokenType.Word),
             new Token(TokenType.Word),
             new Token(TokenType.Word),
-            new Token(TokenType.EndOfLine),
             new Token(TokenType.EndOfInput)
         };
 
@@ -374,7 +362,6 @@ public class UnitTests
             new Token(TokenType.Word),
             new Token(TokenType.Word),
             new Token(TokenType.Word),
-            new Token(TokenType.EndOfLine),
             new Token(TokenType.EndOfInput)
         };
 
@@ -411,7 +398,36 @@ public class UnitTests
             new Token(TokenType.Word),
             new Token(TokenType.Word),
             new Token(TokenType.Word),
+            new Token(TokenType.EndOfInput)
+        };
+
+        // Act
+        LinkedList<Token> output = new LinkedList<Token>();
+        Token outputToken;
+        while((outputToken = mockTokenReaderDecorator.ReadToken()).Type!= TokenType.EndOfInput){
+            output.AddLast(outputToken); 
+        }
+        output.AddLast(outputToken);
+        
+        // Assert
+        Assert.Equal(expectedOutput, output.ToArray());    
+    }
+    [Fact]
+    public void OnlyNewLines()
+    {
+        // Arrange
+        Token[] input = { 
             new Token(TokenType.EndOfLine),
+            new Token(TokenType.EndOfLine),
+            new Token(TokenType.EndOfLine),
+            new Token(TokenType.EndOfLine),
+            new Token(TokenType.EndOfLine),
+            new Token(TokenType.EndOfInput)
+        };
+        var mockTokenRead = new TokenReaderMock(input);
+        var mockTokenReaderDecorator = new ParagraphDetectingTokenReaderDecorator(mockTokenRead);
+
+        Token[] expectedOutput = { 
             new Token(TokenType.EndOfInput)
         };
 

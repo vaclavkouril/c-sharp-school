@@ -1,0 +1,12 @@
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/bin/Debug/net7.0/WordProcessingFramework.deps.json
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/bin/Debug/net7.0/WordProcessingFramework.dll
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/bin/Debug/net7.0/WordProcessingFramework.pdb
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/obj/Debug/net7.0/WordProcessingFramework.csproj.AssemblyReference.cache
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/obj/Debug/net7.0/WordProcessingFramework.GeneratedMSBuildEditorConfig.editorconfig
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/obj/Debug/net7.0/WordProcessingFramework.AssemblyInfoInputs.cache
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/obj/Debug/net7.0/WordProcessingFramework.AssemblyInfo.cs
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/obj/Debug/net7.0/WordProcessingFramework.csproj.CoreCompileInputs.cache
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/obj/Debug/net7.0/WordProcessingFramework.dll
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/obj/Debug/net7.0/refint/WordProcessingFramework.dll
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/obj/Debug/net7.0/WordProcessingFramework.pdb
+/home/starvex/Documents/c-sharp-school/cv-05~no.01-WordProcessingToolkit-Petunia2023-v1-OnlyLegacyWordCounter/WordProcessingFramework/obj/Debug/net7.0/ref/WordProcessingFramework.dll
