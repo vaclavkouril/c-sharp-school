@@ -1,0 +1,81 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/starvex/Documents/c-sharp-school/Benchmark/TestCode/TestCode.csproj": {}
+  },
+  "projects": {
+    "/home/starvex/Documents/c-sharp-school/Benchmark/TestCode/TestCode.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/starvex/Documents/c-sharp-school/Benchmark/TestCode/TestCode.csproj",
+        "projectName": "TestCode",
+        "projectPath": "/home/starvex/Documents/c-sharp-school/Benchmark/TestCode/TestCode.csproj",
+        "packagesPath": "/home/starvex/.nuget/packages/",
+        "outputPath": "/home/starvex/Documents/c-sharp-school/Benchmark/TestCode/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/starvex/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "BenchmarkDotNet": {
+              "target": "Package",
+              "version": "[0.13.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.24, 6.0.24]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[6.0.24, 6.0.24]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.24, 6.0.24]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.113/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
