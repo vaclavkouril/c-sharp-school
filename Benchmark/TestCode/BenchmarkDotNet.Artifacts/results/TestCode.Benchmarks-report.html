@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>TestCode.Benchmarks-20231119-222733</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.13.10, Arch Linux
+AMD Ryzen 3 2200U with Radeon Vega Mobile Gfx, 1 CPU, 4 logical and 2 physical cores
+.NET SDK 7.0.113
+  [Host]     : .NET 6.0.25 (6.0.2523.51912), X64 RyuJIT AVX2
+  DefaultJob : .NET 6.0.25 (6.0.2523.51912), X64 RyuJIT AVX2
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method                               </th><th>Mean</th><th>Error</th><th>StdDev</th>
+</tr>
+</thead><tbody><tr><td>SortedList_Adding</td><td>7,468.4 &mu;s</td><td>89.22 &mu;s</td><td>79.09 &mu;s</td>
+</tr><tr><td>SortedDictionary_Adding</td><td>7,435.0 &mu;s</td><td>96.80 &mu;s</td><td>85.81 &mu;s</td>
+</tr><tr><td>Dictionary_Sort_Adding</td><td>401.7 &mu;s</td><td>4.68 &mu;s</td><td>4.38 &mu;s</td>
+</tr><tr><td>SortedList_GettingValues_After_Adding</td><td>7,133.2 &mu;s</td><td>48.68 &mu;s</td><td>43.15 &mu;s</td>
+</tr><tr><td>SortedDictionary_GettingValues_After_Adding</td><td>7,226.9 &mu;s</td><td>80.57 &mu;s</td><td>71.42 &mu;s</td>
+</tr><tr><td>Dictionary_Sort_GettingValues_After_Adding</td><td>704.8 &mu;s</td><td>13.71 &mu;s</td><td>13.47 &mu;s</td>
+</tr></tbody></table>
+</body>
+</html>
