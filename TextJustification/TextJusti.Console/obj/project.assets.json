@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/starvex/Documents/c-sharp-third-sem/TextJustification/TextJusti.Console/TextJusti.Console.csproj",
+      "projectUniqueName": "/home/starvex/Documents/c-sharp-school/TextJustification/TextJusti.Console/TextJusti.Console.csproj",
       "projectName": "TextJusti.Console",
-      "projectPath": "/home/starvex/Documents/c-sharp-third-sem/TextJustification/TextJusti.Console/TextJusti.Console.csproj",
+      "projectPath": "/home/starvex/Documents/c-sharp-school/TextJustification/TextJusti.Console/TextJusti.Console.csproj",
       "packagesPath": "/home/starvex/.nuget/packages/",
-      "outputPath": "/home/starvex/Documents/c-sharp-third-sem/TextJustification/TextJusti.Console/obj/",
+      "outputPath": "/home/starvex/Documents/c-sharp-school/TextJustification/TextJusti.Console/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/starvex/.nuget/NuGet/NuGet.Config"

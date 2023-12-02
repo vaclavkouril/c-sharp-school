@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XMChf5jsRxP7my0RiphnZVEOmaQ1gi7TtBzEUbwtLZT3Hbp3LbdNVXxEwfgG/BftL4pHDA2QGeTvagXgvEd00Q==",
+  "dgSpecHash": "FWxhBfe7pPoy3XgUpmxUq0EdlZB3JZ4IksOInk+W2oouCXhx7vhAdsBCe3hNV9WdIF1vF7etao3szSn8ZzO+IA==",
   "success": true,
-  "projectFilePath": "/home/starvex/Documents/c-sharp-third-sem/TextJustification/TextJusti.Console/TextJusti.Console.csproj",
+  "projectFilePath": "/home/starvex/Documents/c-sharp-school/TextJustification/TextJusti.Console/TextJusti.Console.csproj",
   "expectedPackageFiles": [
     "/home/starvex/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.13/microsoft.aspnetcore.app.ref.7.0.13.nupkg.sha512"
   ],
