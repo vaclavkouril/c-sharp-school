@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "RippM6woW5pUCmH5yaUWw4e+B5oijGdUeuxB8G2b0U0+fo7Tjgl9pyb0ffyIFb2XtA41mr5RdBGcL22XenptTg==",
+  "success": true,
+  "projectFilePath": "/home/starvex/Documents/c-sharp-school/NezarkaBookstore/NezarkaBookstore.csproj",
+  "expectedPackageFiles": [
+    "/home/starvex/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.0/microsoft.aspnetcore.app.ref.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,15 @@
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/obj/Debug/net8.0/NezarkaBookstore.GeneratedMSBuildEditorConfig.editorconfig
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/obj/Debug/net8.0/NezarkaBookstore.AssemblyInfoInputs.cache
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/obj/Debug/net8.0/NezarkaBookstore.AssemblyInfo.cs
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/obj/Debug/net8.0/NezarkaBookstore.csproj.CoreCompileInputs.cache
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/obj/Debug/net8.0/NezarkaBookstore.sourcelink.json
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/bin/Debug/net8.0/NezarkaBookstore
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/bin/Debug/net8.0/NezarkaBookstore.deps.json
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/bin/Debug/net8.0/NezarkaBookstore.runtimeconfig.json
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/bin/Debug/net8.0/NezarkaBookstore.dll
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/bin/Debug/net8.0/NezarkaBookstore.pdb
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/obj/Debug/net8.0/NezarkaBookstore.dll
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/obj/Debug/net8.0/refint/NezarkaBookstore.dll
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/obj/Debug/net8.0/NezarkaBookstore.pdb
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/obj/Debug/net8.0/NezarkaBookstore.genruntimeconfig.cache
+/home/starvex/Documents/c-sharp-school/NezarkaBookstore/obj/Debug/net8.0/ref/NezarkaBookstore.dll
