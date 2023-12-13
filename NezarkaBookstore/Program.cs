@@ -45,7 +45,7 @@ namespace NezarkaBookstore
 					switch (tokens[0]) {
 						case "BOOK":
 							store.books.Add(new Book {
-								Id = int.Parse(tokens[1]), Title = tokens[2], Author = tokens[3], Price = decimal.Parse(tokens[4])
+								Id = int.Parse(tokens[1]), Title = tokens[2], Author = tokens[3], Price = int.Parse(tokens[4])
 							});
 							break;
 						case "CUSTOMER":
@@ -81,7 +81,7 @@ namespace NezarkaBookstore
 		public int Id { get; set; }
 		public string Title { get; set; }
 		public string Author { get; set; }
-		public decimal Price { get; set; }
+		public int Price { get; set; }
 	}
 
 	public class Customer {
@@ -123,30 +123,30 @@ namespace NezarkaBookstore
 			Console.WriteLine("<!DOCTYPE html>");
 			Console.WriteLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
 			Console.WriteLine("<head>");
-			Console.WriteLine("    <meta charset=\"utf-8\" />");
-			Console.WriteLine("    <title>Nezarka.net: Online Shopping for Books</title>");
+			Console.WriteLine( "	<meta charset=\"utf-8\" />");
+			Console.WriteLine( "	<title>Nezarka.net: Online Shopping for Books</title>");
 			Console.WriteLine("</head>");
 			Console.WriteLine("<body>");
-			Console.WriteLine("    <style type=\"text/css\">");
-			Console.WriteLine("        table, th, td {");
-			Console.WriteLine("            border: 1px solid black;");
-			Console.WriteLine("            border-collapse: collapse;");
-			Console.WriteLine("        }");
-			Console.WriteLine("        table {");
-			Console.WriteLine("            margin-bottom: 10px;");
-			Console.WriteLine("        }");
-			Console.WriteLine("        pre {");
-			Console.WriteLine("            line-height: 70%;");
-			Console.WriteLine("        }");
-			Console.WriteLine("    </style>");
-			Console.WriteLine("    <h1><pre>  v,<br />Nezarka.NET: Online Shopping for Books</pre></h1>");
-			Console.WriteLine($"    {customer.FirstName}, here is your menu:");
-			Console.WriteLine("<table>");
-			Console.WriteLine("<tr>");
-			Console.WriteLine("<td><a href=\"/Books\">Books</a></td>");
-			Console.WriteLine($"<td><a href=\"/ShoppingCart\">Cart ({Convert.ToString(customer.ShoppingCart.Items.Count)})</a></td>");
-			Console.WriteLine("</tr>");
-			Console.WriteLine("</table>");
+			Console.WriteLine( "	<style type=\"text/css\">");
+			Console.WriteLine( "		table, th, td {");
+			Console.WriteLine( "			border: 1px solid black;");
+			Console.WriteLine( "			border-collapse: collapse;");
+			Console.WriteLine( "		}");
+			Console.WriteLine( "		table {");
+			Console.WriteLine( "			margin-bottom: 10px;");
+			Console.WriteLine( "		}");
+			Console.WriteLine( "		pre {");
+			Console.WriteLine( "			line-height: 70%;");
+			Console.WriteLine( "		}");
+			Console.WriteLine( "	</style>");
+			Console.WriteLine( "	<h1><pre>  v,<br />Nezarka.NET: Online Shopping for Books</pre></h1>");
+			Console.WriteLine($"	{customer.FirstName}, here is your menu:");
+			Console.WriteLine( "	<table>");
+			Console.WriteLine( "		<tr>");
+			Console.WriteLine( "			<td><a href=\"/Books\">Books</a></td>");
+			Console.WriteLine($"			<td><a href=\"/ShoppingCart\">Cart ({Convert.ToString(customer.ShoppingCart.Items.Count)})</a></td>");
+			Console.WriteLine( "		</tr>");
+			Console.WriteLine( "	</table>");
 		}
 		public void RenderFooter(){
 			Console.WriteLine("</body>");
@@ -163,24 +163,25 @@ namespace NezarkaBookstore
 
 		public void RenderBooks(IList<Book> books, Customer customer) {
 			commonView.RenderHeader(customer);
-			Console.WriteLine("Our books for you:");
+			Console.WriteLine( "	Our books for you:");
 			Console.WriteLine("	<table>");
 			int i = 0;
 			foreach (var book in books)
 			{
-				if (i%3 == 0) 
-					Console.WriteLine("		<tr>"); 
+				if (i%3 == 0 && i != 0){
+					Console.WriteLine("		</tr>");
+					Console.WriteLine("		<tr>");
+				}
+				else if (i == 0) Console.WriteLine("		<tr>");
+				i++;
 				Console.WriteLine("			<td style=\"padding: 10px;\">");
-				Console.WriteLine($"<a href=\"/Books/Detail/{Convert.ToString(book.Id)}\">{book.Title}</a><br />");
+				Console.WriteLine($"				<a href=\"/Books/Detail/{Convert.ToString(book.Id)}\">{book.Title}</a><br />");
 				Console.WriteLine($"				Author: {book.Author}<br />");
 				Console.WriteLine($"				Price: {Convert.ToString(book.Price)} EUR &lt;<a href=\"/ShoppingCart/Add/{Convert.ToString(book.Id)}\">Buy</a>&gt;");
 				Console.WriteLine("			</td>");
-				if (i%3 == 0) 
-					Console.WriteLine("		</tr>");
-				i++;	
 			}
-			if (i % 3 > 0) Console.WriteLine("		</tr>");
-			Console.WriteLine("	<table>");
+			if (i != 0) Console.WriteLine(  "		</tr>");
+			Console.WriteLine(	"	</table>");
 
 			commonView.RenderFooter();
 		}
@@ -188,13 +189,13 @@ namespace NezarkaBookstore
 		public void RenderBookDetails(Book book, Customer customer) {
 			commonView.RenderHeader(customer);
 
-			Console.WriteLine("Book details:");
-			Console.WriteLine($"<h2>{book.Title}</h2>");
-			Console.WriteLine("<p style=\"margin-left: 20px\">");
-			Console.WriteLine($"Author: {book.Author}<br />");
-			Console.WriteLine($"Price: {Convert.ToString(book.Price)} EUR<br />");
-			Console.WriteLine("</p>");
-			Console.WriteLine($"<h3>&lt;<a href=\"/ShoppingCart/Add/{Convert.ToString(book.Id)}\">Buy this book</a>&gt;</h3>");
+			Console.WriteLine("	Book details:");
+			Console.WriteLine($"	<h2>{book.Title}</h2>");
+			Console.WriteLine("	<p style=\"margin-left: 20px\">");
+			Console.WriteLine($"	Author: {book.Author}<br />");
+			Console.WriteLine($"	Price: {Convert.ToString(book.Price)} EUR<br />");
+			Console.WriteLine("	</p>");
+			Console.WriteLine($"	<h3>&lt;<a href=\"/ShoppingCart/Add/{Convert.ToString(book.Id)}\">Buy this book</a>&gt;</h3>");
 
 			commonView.RenderFooter();
 		}
@@ -210,7 +211,7 @@ namespace NezarkaBookstore
 
 		public void RenderShoppingCart(Customer customer, ModelStore modelStore) {
 			commonView.RenderHeader(customer);
-			decimal total = 0;
+			int total = 0;
 
 			Console.WriteLine("	Your shopping cart:");
 			Console.WriteLine("	<table>");
@@ -225,19 +226,17 @@ namespace NezarkaBookstore
 				int count = item.Count;
 				Console.WriteLine("		<tr>");
 				Console.WriteLine($"			<td><a href=\"/Books/Detail/{Convert.ToString(book.Id)}\">{book.Title}</a></td>");
-				decimal price = count*book.Price;
+				int price = count*book.Price;
 				total += price;
-
-				if (item.Count == 1) Console.WriteLine($"			<td>{Convert.ToString(book.Price)} EUR</td>");
-				else{
 				Console.WriteLine($"			<td>{Convert.ToString(item.Count)}</td>");
-				
+				if (item.Count == 1) Console.WriteLine($"			<td>{Convert.ToString(book.Price)} EUR</td>");
+				else{		
 				Console.WriteLine($"			<td>{Convert.ToString(count)} * {Convert.ToString(book.Price)} = {Convert.ToString(price)} EUR</td>");
 				}
 				Console.WriteLine($"			<td>&lt;<a href=\"/ShoppingCart/Remove/{Convert.ToString(book.Id)}\">Remove</a>&gt;</td>");
 				Console.WriteLine("		</tr>");
 			}
-			Console.WriteLine("		</table>");
+			Console.WriteLine("	</table>");
 			Console.WriteLine($"	Total price of all items: {Convert.ToString(total)} EUR");
 			commonView.RenderFooter();
 		}
@@ -282,7 +281,7 @@ namespace NezarkaBookstore
 		public void ShowBooks(int customerId) {
 			IList<Book> books = model.GetBooks();
 			Customer customer = model.GetCustomer(customerId);
-			if (books != null && customer != null) {
+			if (books != null && customer != null && model != null) {
 				view.RenderBooks(books, customer);
 			} else {
 				errorView.RenderError();
@@ -293,7 +292,7 @@ namespace NezarkaBookstore
 		public void ShowBookDetails(int bookId, int customerId) {
 			Book book = model.GetBook(bookId);
 			Customer customer = model.GetCustomer(customerId);
-			if (book != null && customer != null) {
+			if (book != null && customer != null && model != null) {
 				view.RenderBookDetails(book, customer);
 			} else {
 				errorView.RenderError();
@@ -314,8 +313,8 @@ namespace NezarkaBookstore
 
 		public void ShowShoppingCart(int customerId) {
 			Customer customer = model.GetCustomer(customerId);
-			if (customer != null) {
-				if (customer.ShoppingCart.Items.Count == 0)
+			if (customer != null && model != null) {
+				if (customer.ShoppingCart.Items.Count == 0 || customer.ShoppingCart.Items == null)
 					view.RenderEmptyShoppingCart(customer);
 				else view.RenderShoppingCart(customer, model);
 			} else {
@@ -325,7 +324,7 @@ namespace NezarkaBookstore
 		public void AddToShoppingCart(int customerId, int bookId){
 			Book book = model.GetBook(bookId);
 			Customer customer = model.GetCustomer(customerId);
-			if (book != null && customer != null) {
+			if (book != null && customer != null && model != null) {
 				bool foundBook = false;
 				foreach (var item in customer.ShoppingCart.Items)
 				{
@@ -339,6 +338,7 @@ namespace NezarkaBookstore
 					ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
 					shoppingCartItem.Count = 1;
 					shoppingCartItem.BookId = bookId;
+					if (customer.ShoppingCart.Items == null) customer.ShoppingCart.Items = new List<ShoppingCartItem>();
 					customer.ShoppingCart.Items.Add(shoppingCartItem);
 				}
 				ShowShoppingCart(customerId);
@@ -350,12 +350,13 @@ namespace NezarkaBookstore
 		public void RemoveFromShoppingCart(int customerId, int bookId){
 			Book book = model.GetBook(bookId);
 			Customer customer = model.GetCustomer(customerId);
-			if (book != null && customer != null) {
+			if (book != null && customer != null && model != null) {
 				bool foundBook = false;
 				foreach (var item in customer.ShoppingCart.Items)
 				{
 				   if (item.BookId == bookId) {
-					   item.Count--; 
+					   item.Count--;
+					   foundBook = true;
 					   if (item.Count <= 0){
 						   customer.ShoppingCart.Items.Remove(item);
 					   }
@@ -365,7 +366,9 @@ namespace NezarkaBookstore
 				if (!foundBook){
 					errorView.RenderError();
 				}
+				else{
 				ShowShoppingCart(customerId);
+				}
 			} else {
 				errorView.RenderError();
 			}
@@ -446,16 +449,16 @@ namespace NezarkaBookstore
 										booksController.ShowBooks(customerId);	
 										break;
 									case Requests.Detail:
-										booksController.ShowBookDetails(GetIntValueFromRequest(inputArray[3]), customerId);											
+										booksController.ShowBookDetails(GetIntValueFromRequest(inputArray[2]), customerId);											
 										break;
 									case Requests.ShoppingCart:
 										shoppingCartController.ShowShoppingCart(customerId);	
 										break;
 									case Requests.Add:
-										shoppingCartController.AddToShoppingCart(customerId, GetIntValueFromRequest(inputArray[3]));
+										shoppingCartController.AddToShoppingCart(customerId, GetIntValueFromRequest(inputArray[2]));
 										break;
 									case Requests.Remove:
-										shoppingCartController.RemoveFromShoppingCart(customerId, GetIntValueFromRequest(inputArray[3]));
+										shoppingCartController.RemoveFromShoppingCart(customerId, GetIntValueFromRequest(inputArray[2]));
 										break;
 
 								    default:
