@@ -1,485 +1,484 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Linq;
 using System.IO;
+using System.Security.Cryptography;
+using System.Net;
 
-namespace NezarkaBookstore
+namespace nezarka
 {
-	//
-	// Model
-	//
 
-	public class ModelStore {
-		private List<Book> books = new List<Book>();
-		private List<Customer> customers = new List<Customer>();
+   //
+    // Model
+    //
 
-		public IList<Book> GetBooks() {
-			return books;
-		}
+    class ModelStore
+    {
+        private List<Book> books = new List<Book>();
+        private List<Customer> customers = new List<Customer>();
 
-		public Book GetBook(int id) {
-			return books.Find(b => b.Id == id);
-		}
+        public IList<Book> GetBooks()
+        {
+            return books;
+        }
 
-		public Customer GetCustomer(int id) {
-			return customers.Find(c => c.Id == id);
-		}
+        public Book GetBook(int id)
+        {
+            return books.Find(b => b.Id == id);
+        }
 
-		public static ModelStore LoadFrom(TextReader reader) {
-			var store = new ModelStore();
+        public Customer GetCustomer(int id)
+        {
+            return customers.Find(c => c.Id == id);
+        }
 
-			try {
-				if (reader.ReadLine() != "DATA-BEGIN") {
-					return null;
-				}
-				while (true) {
-					string line = reader.ReadLine();
-					if (line == null) {
-						return null;
-					} else if (line == "DATA-END") {
-						break;
-					}
+        public static ModelStore LoadFrom(TextReader reader)
+        {
+            var store = new ModelStore();
 
-					string[] tokens = line.Split(';');
-					switch (tokens[0]) {
-						case "BOOK":
-							store.books.Add(new Book {
-								Id = int.Parse(tokens[1]), Title = tokens[2], Author = tokens[3], Price = int.Parse(tokens[4])
-							});
-							break;
-						case "CUSTOMER":
-							store.customers.Add(new Customer {
-								Id = int.Parse(tokens[1]), FirstName = tokens[2], LastName = tokens[3]
-							});
-							break;
-						case "CART-ITEM":
-							var customer = store.GetCustomer(int.Parse(tokens[1]));
-							if (customer == null) {
-								return null;
-							}
-							customer.ShoppingCart.Items.Add(new ShoppingCartItem {
-								BookId = int.Parse(tokens[2]), Count = int.Parse(tokens[3])
-							});
-							break;
-						default:
-							return null;
-					}
-				}
-			} catch (Exception ex) {
-				if (ex is FormatException || ex is IndexOutOfRangeException) {
-					return null;
-				}
-				throw;
-			}
+            try
+            {
+                if (reader.ReadLine() != "DATA-BEGIN")
+                {
+                    return null;
+                }
+                while (true)
+                {
+                    string line = reader.ReadLine();
+                    if (line == null)
+                    {
+                        return null;
+                    }
+                    else if (line == "DATA-END")
+                    {
+                        break;
+                    }
 
-			return store;
-		}
-	}
+                    string[] tokens = line.Split(';');
+                    switch (tokens[0])
+                    {
+                        case "BOOK":
+                            store.books.Add(new Book
+                            {
+                                Id = int.Parse(tokens[1]),
+                                Title = tokens[2],
+                                Author = tokens[3],
+                                Price = decimal.Parse(tokens[4])
+                            });
+                            break;
+                        case "CUSTOMER":
+                            store.customers.Add(new Customer
+                            {
+                                Id = int.Parse(tokens[1]),
+                                FirstName = tokens[2],
+                                LastName = tokens[3]
+                            });
+                            break;
+                        case "CART-ITEM":
+                            var customer = store.GetCustomer(int.Parse(tokens[1]));
+                            if (customer == null)
+                            {
+                                return null;
+                            }
+                            customer.ShoppingCart.Items.Add(new ShoppingCartItem
+                            {
+                                BookId = int.Parse(tokens[2]),
+                                BookCount = int.Parse(tokens[3])
+                            });
+                            break;
+                        default:
+                            return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex is FormatException || ex is IndexOutOfRangeException)
+                {
+                    return null;
+                }
+                return null;
+                throw;
+            }
 
-	public class Book {
-		public int Id { get; set; }
-		public string Title { get; set; }
-		public string Author { get; set; }
-		public int Price { get; set; }
-	}
+            return store;
+        }
+    }
 
-	public class Customer {
-		private ShoppingCart shoppingCart;
+    class Book
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public decimal Price { get; set; }
+    }
 
-		public int Id { get; set; }
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
+    class Customer
+    {
+        private ShoppingCart shoppingCart;
 
-		public ShoppingCart ShoppingCart {
-			get {
-				if (shoppingCart == null) {
-					shoppingCart = new ShoppingCart();
-				}
-				return shoppingCart;
-			}
-			set {
-				shoppingCart = value;
-			}
-		}
-	}
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
-	public class ShoppingCartItem {
-		public int BookId { get; set; }
-		public int Count { get; set; }
-	}
+        public ShoppingCart ShoppingCart
+        {
+            get
+            {
+                if (shoppingCart == null)
+                {
+                    shoppingCart = new ShoppingCart();
+                }
+                return shoppingCart;
+            }
+            set
+            {
+                shoppingCart = value;
+            }
+        }
+    }
 
-	public class ShoppingCart {
-		public int CustomerId { get; set; }
-		public List<ShoppingCartItem> Items = new List<ShoppingCartItem>();
-	}
+    class ShoppingCartItem
+    {
+        public int BookId { get; set; }
+        public int BookCount { get; set; }
+    }
 
-	//
-	// View
-	//
+    class ShoppingCart
+    {
+        public int CustomerId { get; set; }
+        public List<ShoppingCartItem> Items = new List<ShoppingCartItem>();
+    }
+    
+    internal class Program
+    {
+        static void writeHeadTable(string name, string count)
+        {
+            var head = """
+                <!DOCTYPE html>
+                <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <head>
+                	<meta charset="utf-8" />
+                	<title>Nezarka.net: Online Shopping for Books</title>
+                </head>
+                <body>
+                	<style type="text/css">
+                		table, th, td {
+                			border: 1px solid black;
+                			border-collapse: collapse;
+                		}
+                		table {
+                			margin-bottom: 10px;
+                		}
+                		pre {
+                			line-height: 70%;
+                		}
+                	</style>
+                	<h1><pre>  v,<br />Nezarka.NET: Online Shopping for Books</pre></h1>
+                """;
+            Console.WriteLine(head);
+            Console.WriteLine($"	{name}, here is your menu:");
+            var table = """
+                        <table>
+                                <tr>
+                                        <td><a href="/Books">Books</a></td>
+                """;
+            Console.WriteLine(table);
+            Console.WriteLine($"\t\t\t<td><a href=\"/ShoppingCart\">Cart ({count})</a></td>");
+            var end = """
+                                </tr>
+                        </table>
+                """;
+            Console.WriteLine(end);
+        }
 
-	public class CommonView {
-		public void RenderHeader(Customer customer){
-			Console.WriteLine("<!DOCTYPE html>");
-			Console.WriteLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
-			Console.WriteLine("<head>");
-			Console.WriteLine( "	<meta charset=\"utf-8\" />");
-			Console.WriteLine( "	<title>Nezarka.net: Online Shopping for Books</title>");
-			Console.WriteLine("</head>");
-			Console.WriteLine("<body>");
-			Console.WriteLine( "	<style type=\"text/css\">");
-			Console.WriteLine( "		table, th, td {");
-			Console.WriteLine( "			border: 1px solid black;");
-			Console.WriteLine( "			border-collapse: collapse;");
-			Console.WriteLine( "		}");
-			Console.WriteLine( "		table {");
-			Console.WriteLine( "			margin-bottom: 10px;");
-			Console.WriteLine( "		}");
-			Console.WriteLine( "		pre {");
-			Console.WriteLine( "			line-height: 70%;");
-			Console.WriteLine( "		}");
-			Console.WriteLine( "	</style>");
-			Console.WriteLine( "	<h1><pre>  v,<br />Nezarka.NET: Online Shopping for Books</pre></h1>");
-			Console.WriteLine($"	{customer.FirstName}, here is your menu:");
-			Console.WriteLine( "	<table>");
-			Console.WriteLine( "		<tr>");
-			Console.WriteLine( "			<td><a href=\"/Books\">Books</a></td>");
-			Console.WriteLine($"			<td><a href=\"/ShoppingCart\">Cart ({Convert.ToString(customer.ShoppingCart.Items.Count)})</a></td>");
-			Console.WriteLine( "		</tr>");
-			Console.WriteLine( "	</table>");
-		}
-		public void RenderFooter(){
-			Console.WriteLine("</body>");
-			Console.WriteLine("</html>");
-		}
-	}
-	
-	public class BooksView {
-		private CommonView commonView;
+        static void InvalidRequest()
+        {
+            var invalid = """
+                <!DOCTYPE html>
+                <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <head>
+                	<meta charset="utf-8" />
+                	<title>Nezarka.net: Online Shopping for Books</title>
+                </head>
+                <body>
+                <p>Invalid request.</p>
+                </body>
+                </html>
+                """;
+            Console.WriteLine(invalid);
+        }
 
-		public BooksView(CommonView commonView) {
-			this.commonView = commonView;
-		}
+        static void cBook(ModelStore ms, string cusid)
+        {
+            var b = ms.GetBooks();
+            var cus = ms.GetCustomer(int.Parse(cusid));
+            if (cus == null || b == null)
+            { InvalidRequest(); }
+            else
+            {
+                writeHeadTable(cus.FirstName, Convert.ToString(cus.ShoppingCart.Items.Count));
+                int writed = 0;
+                var wr1 = """
+                        Our books for you:
+                        <table>
+                """;
+                var tr = """
+                                </tr>
+                                <tr>
+                """;
+                Console.WriteLine(wr1);
+                foreach (var bk in b)
+                {
+                    if (writed % 3 == 0 && writed != 0)
+                        Console.WriteLine(tr);
+                    else if (writed == 0)
+                        Console.WriteLine("\t\t<tr>");
+                    Console.WriteLine("\t\t\t<td style=\"padding: 10px;\">");
+                    Console.WriteLine($"\t\t\t\t<a href=\"/Books/Detail/{bk.Id}\">{bk.Title}</a><br />");
+                    Console.WriteLine($"\t\t\t\tAuthor: {bk.Author}<br />");
+                    Console.WriteLine($"\t\t\t\tPrice: {bk.Price} EUR &lt;<a href=\"/ShoppingCart/Add/{bk.Id}\">Buy</a>&gt;");
+                    Console.WriteLine("\t\t\t</td>");
+                    writed++;
+                }
+                var wr2 = """
 
-		public void RenderBooks(IList<Book> books, Customer customer) {
-			commonView.RenderHeader(customer);
-			Console.WriteLine( "	Our books for you:");
-			Console.WriteLine("	<table>");
-			int i = 0;
-			foreach (var book in books)
-			{
-				if (i%3 == 0 && i != 0){
-					Console.WriteLine("		</tr>");
-					Console.WriteLine("		<tr>");
-				}
-				else if (i == 0) Console.WriteLine("		<tr>");
-				i++;
-				Console.WriteLine("			<td style=\"padding: 10px;\">");
-				Console.WriteLine($"				<a href=\"/Books/Detail/{Convert.ToString(book.Id)}\">{book.Title}</a><br />");
-				Console.WriteLine($"				Author: {book.Author}<br />");
-				Console.WriteLine($"				Price: {Convert.ToString(book.Price)} EUR &lt;<a href=\"/ShoppingCart/Add/{Convert.ToString(book.Id)}\">Buy</a>&gt;");
-				Console.WriteLine("			</td>");
-			}
-			if (i != 0) Console.WriteLine(  "		</tr>");
-			Console.WriteLine(	"	</table>");
+                    """;
+                if (writed == 0)
+                {
+                    wr2 = """
+                	</table>
+                </body>
+                </html>
+                """;
+                }
+                else
+                {
+                    wr2 = """
+                		</tr>
+                	</table>
+                </body>
+                </html>
+                """;
+                }
+                Console.WriteLine(wr2);
+            }
+        }
 
-			commonView.RenderFooter();
-		}
+        static bool checkIT(string[] IT)
+        {
+            bool ss = true;
+            if (IT.Length != 3) { ss = false; }
+            try
+            {
+                if (IT[0] != "GET") { ss = false; }
+                int _ = Convert.ToInt32(IT[1]);
+                string[] html = IT[2].Split('/');
+                if (html.Length != 4 && html.Length != 6) { ss = false; }
+                if (html[0] != "http:") { ss = false; }
+                if (html[1] != "") { ss = false; }
+                if (html[2] != "www.nezarka.net") { ss = false; }
+                if ((html[3] != "Books") && html[3] != "ShoppingCart") { ss = false; }
+                if (html.Length == 6)
+                {
+                    if (html[4] != "Detail" && html[4] != "Add" && html[4] != "Remove") { ss = false; }
+                    int __ = Convert.ToInt32(html[5]);
+                }
+            }
+            catch { ss = false; }
+            return ss;
+        }
 
-		public void RenderBookDetails(Book book, Customer customer) {
-			commonView.RenderHeader(customer);
+        static void cBooksDetail_BookId_(ModelStore ms, string cusid, int bid)
+        {
+            var b = ms.GetBook(bid);
+            var cus = ms.GetCustomer(int.Parse(cusid));
+            if (cus == null || b == null)
+            { InvalidRequest(); }
+            else
+            {
+                writeHeadTable(cus.FirstName, Convert.ToString(cus.ShoppingCart.Items.Count));
+                Console.WriteLine("\tBook details:");
+                Console.WriteLine($"\t<h2>{b.Title}</h2>");
+                Console.WriteLine("\t<p style=\"margin-left: 20px\">");
+                Console.WriteLine($"\tAuthor: {b.Author}<br />");
+                Console.WriteLine($"\tPrice: {b.Price} EUR<br />");
+                Console.WriteLine("\t</p>");
+                Console.WriteLine($"\t<h3>&lt;<a href=\"/ShoppingCart/Add/{b.Id}\">Buy this book</a>&gt;</h3>");
+                Console.WriteLine("</body>");
+                Console.WriteLine("</html>");
+            }
+        }
 
-			Console.WriteLine("	Book details:");
-			Console.WriteLine($"	<h2>{book.Title}</h2>");
-			Console.WriteLine("	<p style=\"margin-left: 20px\">");
-			Console.WriteLine($"	Author: {book.Author}<br />");
-			Console.WriteLine($"	Price: {Convert.ToString(book.Price)} EUR<br />");
-			Console.WriteLine("	</p>");
-			Console.WriteLine($"	<h3>&lt;<a href=\"/ShoppingCart/Add/{Convert.ToString(book.Id)}\">Buy this book</a>&gt;</h3>");
+        static void cShoppingCart(ModelStore ms, string cusid)
+        {
+            var cus = ms.GetCustomer(int.Parse(cusid));
+            var x = ms.GetBooks();
+            if (cus == null || x == null)
+            { InvalidRequest(); }
+            else
+            {
+                writeHeadTable(cus.FirstName, Convert.ToString(cus.ShoppingCart.Items.Count));
+                if (cus.ShoppingCart.Items == null || cus.ShoppingCart.Items.Count == 0)
+                {
+                    var idk = """
+                            Your shopping cart is EMPTY.
+                    </body>
+                    </html>
+                    """;
+                    Console.WriteLine(idk);
+                }
+                else
+                {
+                    var wr1 = """
+                        Your shopping cart:
+                        <table>
+                	        <tr>
+                		        <th>Title</th>
+                		        <th>Count</th>
+                		        <th>Price</th>
+                		        <th>Actions</th>
+                	        </tr>
+                """;
+                    Console.WriteLine(wr1);
+                    var totalPrice = 0;
+                    foreach (var bid in cus.ShoppingCart.Items)
+                    {
+                        var b = ms.GetBook(bid.BookId);
+                        Console.WriteLine("\t\t<tr>");
+                        Console.WriteLine($"\t\t\t<td><a href=\"/Books/Detail/{b.Id}\">{b.Title}</a></td>");
+                        Console.WriteLine($"\t\t\t<td>{bid.BookCount}</td>");
+                        if (bid.BookCount == 1)
+                        { Console.WriteLine($"\t\t\t<td>{b.Price} EUR</td>"); totalPrice += Convert.ToInt32(b.Price); }
+                        else { Console.WriteLine($"\t\t\t<td>{bid.BookCount} * {b.Price} = {bid.BookCount * b.Price} EUR</td>"); totalPrice += Convert.ToInt32(bid.BookCount * b.Price); }
+                        Console.WriteLine($"\t\t\t<td>&lt;<a href=\"/ShoppingCart/Remove/{b.Id}\">Remove</a>&gt;</td>");
+                        Console.WriteLine("\t\t</tr>");
+                    }
+                    Console.WriteLine($"\t</table>");
+                    Console.WriteLine($"\tTotal price of all items: {totalPrice} EUR");
+                    Console.WriteLine("</body>");
+                    Console.WriteLine("</html>");
+                }
+            }
+        }
 
-			commonView.RenderFooter();
-		}
-	}
+        static ModelStore addBook(ModelStore ms, string cusid, string bookid)
+        {
+            var cus = ms.GetCustomer(int.Parse(cusid));
+            int bi = Convert.ToInt32(bookid);
+            var x = ms.GetBook(bi);
+            bool itsin = false;
+            if (cus != null && x != null)
+            {
+                foreach (var b in cus.ShoppingCart.Items)
+                {
+                    if (b.BookId == bi)
+                    {
+                        itsin = true;
+                        b.BookCount++;
+                        break;
+                    }
+                }
+                if (!itsin)
+                {
+                    ShoppingCartItem item = new ShoppingCartItem();
+                    item.BookCount = 1;
+                    item.BookId = bi;
+                    if (cus.ShoppingCart.Items == null) { cus.ShoppingCart.Items = new List<ShoppingCartItem>(); }
+                    cus.ShoppingCart.Items.Add(item);
+                }
+            } else { InvalidRequest(); }
+            return ms;
+        }
 
-	public class ShoppingCartView {
-		private CommonView commonView;
+        static ModelStore removeBook(ModelStore ms, string cusid, string bookid)
+        {
+            var cus = ms.GetCustomer(int.Parse(cusid));
+            int bi = Convert.ToInt32(bookid);
+            var x = ms.GetBook(bi);
+            bool itsin = false;
+            if (cus != null && x != null)
+            {
+                foreach (var b in cus.ShoppingCart.Items)
+                {
+                    if (b.BookId == bi)
+                    {
+                        itsin = true;
+                        b.BookCount--;
+                        if (b.BookCount <= 0)
+                            cus.ShoppingCart.Items.Remove(b);
+                        break;
+                    }
+                }
 
+                if (!itsin)
+                {
+                    InvalidRequest();
+                }
+                else { cShoppingCart(ms, cusid); }
+            }
+            else { InvalidRequest(); }
+            return ms;
+        }
 
-		public ShoppingCartView(CommonView commonView) {
-			this.commonView = commonView;
-		}
+        static void Main(string[] args)
+        {
+            ModelStore mStore = ModelStore.LoadFrom(Console.In);
+            if (mStore == null)
+                Console.WriteLine("Data error.");
+            else
+            {
+               try
+                { 
+                    string? line;
+                    while ((line = Console.ReadLine()) != null)
+                    {
+                        string[] getIdArg = line.Split(' ');
+                        if (!checkIT(getIdArg))
+                        {
+                            InvalidRequest();
+                        }
+                        else
+                        {
+                            string comanda = "";
+                            string[] paneboze = getIdArg[2].Substring(23).Split('/');
+                            try { comanda = paneboze[0] + "/" + paneboze[1]; }
+                            catch { comanda = paneboze[0]; }
+                            var ccc = mStore.GetCustomer(Convert.ToInt32(getIdArg[1]));
+                            /*if (ccc == null || ccc.ShoppingCart.Items == null)
+                                InvalidRequest();
+                            else
+                            {*/
+                                switch (comanda)
+                                {
+                                    case "Books":
+                                        cBook(mStore, getIdArg[1]);
+                                        break;
+                                    case "Books/Detail":
+                                        cBooksDetail_BookId_(mStore, getIdArg[1], Convert.ToInt32(paneboze[2]));
+                                        break;
+                                    case "ShoppingCart":
+                                        cShoppingCart(mStore, getIdArg[1]);
+                                        break;
+                                    case "ShoppingCart/Add":
+                                        mStore = addBook(mStore, getIdArg[1], paneboze[2]);
+                                        cShoppingCart(mStore, getIdArg[1]);
+                                        break;
+                                    case "ShoppingCart/Remove":
+                                        mStore = removeBook(mStore, getIdArg[1], paneboze[2]);
+                                        break;
+                                    default:
+                                        InvalidRequest();
+                                        break;
+                                }
+                            
+                        }
+                        Console.WriteLine("====");
+                    }
+                }
+                catch { InvalidRequest(); Console.WriteLine("===="); }
+            }
 
-		public void RenderShoppingCart(Customer customer, ModelStore modelStore) {
-			commonView.RenderHeader(customer);
-			int total = 0;
-
-			Console.WriteLine("	Your shopping cart:");
-			Console.WriteLine("	<table>");
-			Console.WriteLine("		<tr>");
-			Console.WriteLine("			<th>Title</th>");
-			Console.WriteLine("			<th>Count</th>");
-			Console.WriteLine("			<th>Price</th>");
-			Console.WriteLine("			<th>Actions</th>");
-			Console.WriteLine("		</tr>");
-			foreach (var item in customer.ShoppingCart.Items){
-				Book book = modelStore.GetBook(item.BookId);
-				int count = item.Count;
-				Console.WriteLine("		<tr>");
-				Console.WriteLine($"			<td><a href=\"/Books/Detail/{Convert.ToString(book.Id)}\">{book.Title}</a></td>");
-				int price = count*book.Price;
-				total += price;
-				Console.WriteLine($"			<td>{Convert.ToString(item.Count)}</td>");
-				if (item.Count == 1) Console.WriteLine($"			<td>{Convert.ToString(book.Price)} EUR</td>");
-				else{		
-				Console.WriteLine($"			<td>{Convert.ToString(count)} * {Convert.ToString(book.Price)} = {Convert.ToString(price)} EUR</td>");
-				}
-				Console.WriteLine($"			<td>&lt;<a href=\"/ShoppingCart/Remove/{Convert.ToString(book.Id)}\">Remove</a>&gt;</td>");
-				Console.WriteLine("		</tr>");
-			}
-			Console.WriteLine("	</table>");
-			Console.WriteLine($"	Total price of all items: {Convert.ToString(total)} EUR");
-			commonView.RenderFooter();
-		}
-
-		public void RenderEmptyShoppingCart(Customer customer) {
-			commonView.RenderHeader(customer);
-			Console.WriteLine("	Your shopping cart is EMPTY.");
-			commonView.RenderFooter();
-		}
-	}
-
-	public class ErrorView {
-		public void RenderError() {
-			Console.WriteLine("<!DOCTYPE html>");
-			Console.WriteLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
-			Console.WriteLine("<head>");
-			Console.WriteLine("	<meta charset=\"utf-8\" />");
-			Console.WriteLine("	<title>Nezarka.net: Online Shopping for Books</title>");
-			Console.WriteLine("</head>");
-			Console.WriteLine("<body>");
-			Console.WriteLine("<p>Invalid request.</p>");
-			Console.WriteLine("</body>");
-			Console.WriteLine("</html>");
-		}
-	}
-	
-	//
-	// Controller
-	//
-	
-	public class BooksController {
-		private ModelStore model;
-		private BooksView view;
-		private ErrorView errorView;
-
-		public BooksController(ModelStore model, BooksView view, ErrorView errorView) {
-			this.model = model;
-			this.view = view;
-			this.errorView = errorView;
-		}
-
-		public void ShowBooks(int customerId) {
-			IList<Book> books = model.GetBooks();
-			Customer customer = model.GetCustomer(customerId);
-			if (books != null && customer != null && model != null) {
-				view.RenderBooks(books, customer);
-			} else {
-				errorView.RenderError();
-			}
-
-		}
-
-		public void ShowBookDetails(int bookId, int customerId) {
-			Book book = model.GetBook(bookId);
-			Customer customer = model.GetCustomer(customerId);
-			if (book != null && customer != null && model != null) {
-				view.RenderBookDetails(book, customer);
-			} else {
-				errorView.RenderError();
-			}
-		}
-	}
-
-	public class ShoppingCartController {
-		private ModelStore model;
-		private ShoppingCartView view;
-		private ErrorView errorView;
-
-		public ShoppingCartController(ModelStore model, ShoppingCartView view, ErrorView errorView) {
-			this.model = model;
-			this.view = view;
-			this.errorView = errorView;
-		}
-
-		public void ShowShoppingCart(int customerId) {
-			Customer customer = model.GetCustomer(customerId);
-			if (customer != null && model != null) {
-				if (customer.ShoppingCart.Items.Count == 0 || customer.ShoppingCart.Items == null)
-					view.RenderEmptyShoppingCart(customer);
-				else view.RenderShoppingCart(customer, model);
-			} else {
-				errorView.RenderError();
-			}
-		}
-		public void AddToShoppingCart(int customerId, int bookId){
-			Book book = model.GetBook(bookId);
-			Customer customer = model.GetCustomer(customerId);
-			if (book != null && customer != null && model != null) {
-				bool foundBook = false;
-				foreach (var item in customer.ShoppingCart.Items)
-				{
-				   if (item.BookId == bookId) {
-					   item.Count++;
-					   foundBook = true;
-					   break;
-				   }
-				}
-				if (!foundBook){
-					ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
-					shoppingCartItem.Count = 1;
-					shoppingCartItem.BookId = bookId;
-					if (customer.ShoppingCart.Items == null) customer.ShoppingCart.Items = new List<ShoppingCartItem>();
-					customer.ShoppingCart.Items.Add(shoppingCartItem);
-				}
-				ShowShoppingCart(customerId);
-			} else {
-				errorView.RenderError();
-			}
-		}
-		
-		public void RemoveFromShoppingCart(int customerId, int bookId){
-			Book book = model.GetBook(bookId);
-			Customer customer = model.GetCustomer(customerId);
-			if (book != null && customer != null && model != null) {
-				bool foundBook = false;
-				foreach (var item in customer.ShoppingCart.Items)
-				{
-				   if (item.BookId == bookId) {
-					   item.Count--;
-					   foundBook = true;
-					   if (item.Count <= 0){
-						   customer.ShoppingCart.Items.Remove(item);
-					   }
-					   break;
-				   }
-				}
-				if (!foundBook){
-					errorView.RenderError();
-				}
-				else{
-				ShowShoppingCart(customerId);
-				}
-			} else {
-				errorView.RenderError();
-			}
-		}
-	}
-	
-	public class ErrorController {
-		private ErrorView view;
-
-		public ErrorController(ErrorView view) {
-			this.view = view;
-		}
-
-		public void ShowError() {
-			view.RenderError();
-		}
-	}
-
-    internal class Program {
-		private enum Requests {Books, Detail, ShoppingCart, Add, Remove};
-		private static Requests? ProcessRequest(string request){
-			string[] link = { "http:", "www.nezarka.net" }; 
-			request = request.Replace("http://", "http:/");
-			string[] requestParts = request.Split('/');
-			if (link[0] != requestParts[0] || link[1] != requestParts[1] || requestParts.Length < 3)
-				return null;
-			switch (requestParts[2])
-			{
-				case "Books":
-					if (requestParts.Length == 3) return Requests.Books;
-					else if (requestParts.Length == 5 && requestParts[3] == "Detail") return Requests.Detail;
-					else return null;
-
-
-				case "ShoppingCart":
-					if (requestParts.Length == 3) return Requests.ShoppingCart;
-					else if(requestParts.Length == 5 ){
-						if (requestParts[3] == "Add") return Requests.Add;
-						if (requestParts[3] == "Remove") return Requests.Remove;
-						else return null;
-					} 
-					else return null;
-
-				default:
-					return null;
-			}
-			
-		}
-		private static int GetIntValueFromRequest(string request){
-			string[] requestParts = request.Split('/');
-		
-			return int.Parse(requestParts[requestParts.Length-1]);
-		}
-		
-
-        static void Main(string[] args) {
-			try{
-			    ModelStore modelStore = ModelStore.LoadFrom(Console.In);
-				if (modelStore == null) throw new Exception();
-				else{
-					var commonView = new CommonView();
-					var errorView = new ErrorView();
-					var booksView = new BooksView(commonView);
-					var shoppingCartView = new ShoppingCartView(commonView);
-					var booksController = new BooksController(modelStore, booksView, errorView);
-					var shoppingCartController = new ShoppingCartController(modelStore, shoppingCartView, errorView);
-					var errorController = new ErrorController(errorView);
-					string? line;
-					while ((line = Console.ReadLine()) != null ){
-						string[] inputArray = line.Split(' ');
-						try{
-							if (inputArray.Length == 3 && inputArray[0] == "GET"){
-								int customerId = int.Parse(inputArray[1]);
-								Requests? request = ProcessRequest(inputArray[2]);
-								switch (request)
-								{
-									case Requests.Books:
-										booksController.ShowBooks(customerId);	
-										break;
-									case Requests.Detail:
-										booksController.ShowBookDetails(GetIntValueFromRequest(inputArray[2]), customerId);											
-										break;
-									case Requests.ShoppingCart:
-										shoppingCartController.ShowShoppingCart(customerId);	
-										break;
-									case Requests.Add:
-										shoppingCartController.AddToShoppingCart(customerId, GetIntValueFromRequest(inputArray[2]));
-										break;
-									case Requests.Remove:
-										shoppingCartController.RemoveFromShoppingCart(customerId, GetIntValueFromRequest(inputArray[2]));
-										break;
-
-								    default:
-										errorController.ShowError();
-										break;
-								}
-
-							}
-							else errorController.ShowError();
-							Console.WriteLine("====");
-						}
-						catch {
-							errorController.ShowError();
-							Console.WriteLine("====");
-						}
-					}
-				}
-			}
-			catch{
-			    Console.WriteLine("Data error.");
-			}
-		}
-	}
+        }
+    }
 }

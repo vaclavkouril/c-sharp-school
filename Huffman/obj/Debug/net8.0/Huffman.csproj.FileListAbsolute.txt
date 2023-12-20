@@ -1,0 +1,15 @@
+/home/starvex/Documents/c-sharp-school/Huffman/bin/Debug/net8.0/Huffman
+/home/starvex/Documents/c-sharp-school/Huffman/bin/Debug/net8.0/Huffman.deps.json
+/home/starvex/Documents/c-sharp-school/Huffman/bin/Debug/net8.0/Huffman.runtimeconfig.json
+/home/starvex/Documents/c-sharp-school/Huffman/bin/Debug/net8.0/Huffman.dll
+/home/starvex/Documents/c-sharp-school/Huffman/bin/Debug/net8.0/Huffman.pdb
+/home/starvex/Documents/c-sharp-school/Huffman/obj/Debug/net8.0/Huffman.GeneratedMSBuildEditorConfig.editorconfig
+/home/starvex/Documents/c-sharp-school/Huffman/obj/Debug/net8.0/Huffman.AssemblyInfoInputs.cache
+/home/starvex/Documents/c-sharp-school/Huffman/obj/Debug/net8.0/Huffman.AssemblyInfo.cs
+/home/starvex/Documents/c-sharp-school/Huffman/obj/Debug/net8.0/Huffman.csproj.CoreCompileInputs.cache
+/home/starvex/Documents/c-sharp-school/Huffman/obj/Debug/net8.0/Huffman.sourcelink.json
+/home/starvex/Documents/c-sharp-school/Huffman/obj/Debug/net8.0/Huffman.dll
+/home/starvex/Documents/c-sharp-school/Huffman/obj/Debug/net8.0/refint/Huffman.dll
+/home/starvex/Documents/c-sharp-school/Huffman/obj/Debug/net8.0/Huffman.pdb
+/home/starvex/Documents/c-sharp-school/Huffman/obj/Debug/net8.0/Huffman.genruntimeconfig.cache
+/home/starvex/Documents/c-sharp-school/Huffman/obj/Debug/net8.0/ref/Huffman.dll
