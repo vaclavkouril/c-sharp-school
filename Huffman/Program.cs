@@ -12,10 +12,19 @@ namespace Huffman
                 Console.WriteLine("Argument Error");
                 return;
             }
-
+            string inputFilePath = args[0];
+            string outputFilePath = inputFilePath + ".huff";
+            
             try{
-                var tree = HuffmanTreeBuilder.BuildTree(args[0]);
-                tree.PrintTree();
+                var tree = HuffmanTreeBuilder.BuildTree(inputFilePath);
+                var encodingTable = tree.GenerateEncodingTable();
+                using (var inputFileStream = new FileStream(inputFilePath, FileMode.Open, FileAccess.Read))
+                using (var outputFileStream = new FileStream(outputFilePath, FileMode.Create))
+                using (var binaryWriter = new BinaryWriter(outputFileStream)){
+                    tree.HeaderToStream(binaryWriter);             
+                    tree.WriteTreeToStream(binaryWriter);
+                    Encoder.EncodeData(encodingTable, inputFileStream, binaryWriter);
+                }            
             }
             catch{
                 Console.WriteLine("File Error");
@@ -65,8 +74,7 @@ namespace Huffman
 
 
     class FileReader{
-        public Dictionary<byte, int> ReadFile(string filePath)
-        {
+        public Dictionary<byte, int> ReadFile(string filePath){
             var frequencies = new Dictionary<byte, int>();
             
             using (FileStream fileStream = File.OpenRead(filePath)){
@@ -128,6 +136,32 @@ namespace Huffman
             _root = root;
         }
 
+
+        public void HeaderToStream(BinaryWriter writer){
+            byte[] header = { 0x7B, 0x68, 0x75, 0x7C, 0x6D, 0x7D, 0x66, 0x66 };
+            writer.Write(header);
+
+        }
+
+        public Dictionary<byte, string> GenerateEncodingTable(){
+            var table = new Dictionary<byte, string>();
+            GenerateEncodingTable(_root, "", table);
+            return table;
+        }
+
+        private void GenerateEncodingTable(TreeNode node, string code, Dictionary<byte, string> table){
+            if (node == null) return;
+
+            if (node.Symbol.HasValue){
+                table[node.Symbol.Value] = code;
+            }
+            else{
+                GenerateEncodingTable(node.LeftChild, code + "0", table);
+                GenerateEncodingTable(node.RightChild, code + "1", table); 
+            }
+        }
+
+
         public void PrintTree(){
             PrintNode(_root);
         }
@@ -135,16 +169,77 @@ namespace Huffman
         private void PrintNode(TreeNode node){
             if (node == null) return;
 
-            if (node.Symbol.HasValue)
-            {
+            if (node.Symbol.HasValue){
                 Console.Write($"*{node.Symbol.Value}:{node.Weight} ");
             }
-            else
-            {
+            else{
                 Console.Write($"{node.Weight} ");
                 PrintNode(node.LeftChild);
                 PrintNode(node.RightChild);
             }
+        }
+
+        public void WriteTreeToStream(BinaryWriter writer){
+            WriteNodeToStream(_root, writer);
+            writer.Write(new byte[8]); 
+        }
+
+        private void WriteNodeToStream(TreeNode node, BinaryWriter writer){
+            if (node == null) return;
+
+            ulong data = 0;
+            if (node.Symbol.HasValue){
+                data = 1;
+                data |= ((ulong)node.Weight & 0x00FFFFFFFFFFFFFF) << 1;
+                data |= (ulong)node.Symbol.Value << 56;
+            }
+            else{
+                data = ((ulong)node.Weight & 0x00FFFFFFFFFFFFFF) << 1;
+            }
+            writer.Write(data);
+            
+            WriteNodeToStream(node.LeftChild, writer);
+            WriteNodeToStream(node.RightChild, writer);
+        }
+    }
+
+    
+    
+    class Encoder
+    {
+        public static void EncodeData(Dictionary<byte, string> encodingTable, Stream inputStream, BinaryWriter outputWriter){
+            int currentByte;
+            int bitBuffer = 0;
+            int bitBufferLength = 0;
+
+            while ((currentByte = inputStream.ReadByte()) != -1){
+                string code = encodingTable[(byte)currentByte];
+
+                foreach (char bit in code){
+                    bitBuffer = (bitBuffer << 1) | (bit == '1' ? 1 : 0);
+                    bitBufferLength++;
+
+                    if (bitBufferLength == 8){
+                        outputWriter.Write((byte)ReverseBits(bitBuffer));
+                        bitBuffer = 0;
+                        bitBufferLength = 0;
+                    }
+                }
+            }
+
+            if (bitBufferLength > 0){
+                bitBuffer <<= (8 - bitBufferLength);
+                outputWriter.Write(ReverseBits(bitBuffer));
+            }
+        }
+
+        private static byte ReverseBits(int b){
+            int reversed = 0;
+            for (int i = 0; i < 8; i++){
+                reversed = (reversed << 1) | (b & 1);
+                b >>= 1;
+            }
+            return (byte)reversed;
         }
     }
 }
